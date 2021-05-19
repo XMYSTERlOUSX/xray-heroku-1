@@ -37,7 +37,7 @@ cat << EOF > /etc/config.json
                     "certificates": [
                         {
                             "certificateFile": "/opensssl/xray.crt",
-                            "keyFile": "/openssl/xray.key"
+                            "keyFile": "/opensssl/xray.key"
                         }
                     ]
                 }
