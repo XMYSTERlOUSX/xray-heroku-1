@@ -1,6 +1,7 @@
 FROM golang:alpine AS builder
 RUN apk update && apk add --no-cache git
 RUN apk update && apk add --no-cache tzdata
+RUN apk update && apk add --no-cache openssl
 ENV TZ=Asia/Colombo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /go/src/xray/core
