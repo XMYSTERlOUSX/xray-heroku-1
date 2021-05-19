@@ -1,11 +1,12 @@
 #!/bin/sh
 
-# config xray
-mkdir /opensssl && cd /opensssl
 openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
     -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" \
     -keyout xray.key  -out xray.crt
 chmod 777 xray.key
+mkdir /etc/xray
+cp xray.key /etc/xray/
+cp xray.crt /etc/xray/
 cat << EOF > /etc/config.json
 {
     "inbounds": [
@@ -36,8 +37,8 @@ cat << EOF > /etc/config.json
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/opensssl/xray.crt",
-                            "keyFile": "/opensssl/xray.key"
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.key"
                         }
                     ]
                 }
