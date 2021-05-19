@@ -9,6 +9,9 @@ cp xray.key /etc/xray/
 cp xray.crt /etc/xray/
 cat << EOF > /etc/config.json
 {
+    "log": {
+        "loglevel": "none"
+    },
     "inbounds": [
         {
             "port": $PORT,
@@ -17,21 +20,21 @@ cat << EOF > /etc/config.json
                 "clients": [
                     {
                         "id": "$UUID",
-                        "flow": "xtls-rprx-direct",
-                        "level": 0
+                        "level": 0,
+                        "email": "love@example.com"
                     }
                 ],
                 "decryption": "none",
                 "fallbacks": [
                     {
-                        "dest": "80"
+                        "dest": 80
                     }
-                 ]
+                ]
             },
             "streamSettings": {
                 "network": "tcp",
-                "security": "xtls",
-                "xtlsSettings": {
+                "security": "tls",
+                "tlsSettings": {
                     "alpn": [
                         "http/1.1"
                     ],
